@@ -27,17 +27,13 @@ function step(g, m, n) {
   const result = primeBetween(m, n);
   let holdingNumber;
   let count = 0;
-  let final = [];
-
   while (count < result.length) {
     holdingNumber = result[count];
 
     for (i = 0; i < result.length; i++) {
       if (count !== i) {
         if (result[i] - holdingNumber === g) {
-          final.push(holdingNumber);
-          final.push(result[i]);
-          return final;
+          return [holdingNumber, result[i]];
         }
       }
     }

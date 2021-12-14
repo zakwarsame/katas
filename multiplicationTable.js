@@ -15,9 +15,6 @@ const multiplicationTable = function(maxValue) {
     }
 
     return table
-
-    // starting number goes from 1 to maxValue
-
   };
   
   console.log(multiplicationTable(1));

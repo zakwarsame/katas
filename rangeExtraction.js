@@ -1,40 +1,70 @@
+/**
+ * A format for expressing an ordered list of integers is to use a comma separated list of either
+
+individual integers
+or a range of integers denoted by the starting integer separated from the end integer in the range by a dash, '-'. The range includes all integers in the interval including both endpoints. It is not considered a range unless it spans at least 3 numbers. For example "12,13,15-17"
+Complete the solution so that it takes a list of integers in increasing order and returns a correctly formatted string in the range format.
+
+Example:
+
+solution([-10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]);
+// returns "-10--8,-6,-3-1,3-5,7-11,14,15,17-20"
+ */
+
 function solution(list) {
   // TODO: complete solution
-  let newArr = [];
-  let myObj = {
-    count: 0,
-    array: [],
+  let finArr = [];
+  let myList = {
+    counter: 0,
+    start: 0,
+    end: 0,
   };
 
   list.forEach((num, i, arr) => {
-    if (myObj["count"] >= 3) {
-      console.log(myObj["array"]);
-      newArr.push(
-        `${myObj["array"][0]}-${myObj["array"][myObj["array"].length - 1]} `
-      );
-      myObj["count"] = 0;
-      myObj["array"] = [];
-    }
-
-    if (num + 1 === arr[i + 1]) {
-      if (num - 1 === arr[i - 1] && !myObj["array"].includes(num)) {
-          
-          // myObj["array"].push(num);
+    if (num === myList["end"] + 1) {
+      myList["end"] = num;
+      myList["counter"]++;
+      if (num === arr[arr.length - 1] && myList["counter"] >= 3) {
+        finArr.push(`${myList["start"]}-${myList["end"]}`);
+      } else if (
+        num === arr[arr.length - 1] &&
+        myList["counter"] <= 2 &&
+        myList["counter"] > 0
+      ) {
+        if (myList["start"] === myList["end"]) {
+          finArr.push(myList["start"]);
+        } else if (myList["start"] !== myList["end"]) {
+          finArr.push(myList["start"]);
+          finArr.push(myList["end"]);
         }
-        myObj["count"]++;
-      myObj["array"].push(num);
-    } else if (num + 1 !== arr[i + 1]) {
-      myObj["count"] = 0;
-      myObj["array"] = [];
+      }
+    } else if (num !== myList["end"] + 1) {
+      if (myList["counter"] >= 3) {
+        finArr.push(`${myList["start"]}-${myList["end"]}`);
+      }
+
+      if (myList["counter"] <= 2 && myList["counter"] > 0) {
+        if (myList["start"] === myList["end"]) {
+          finArr.push(myList["start"]);
+        } else if (myList["start"] !== myList["end"]) {
+          finArr.push(myList["start"]);
+          finArr.push(myList["end"]);
+        }
+      }
+      if (num === arr[arr.length - 1]) finArr.push(num);
+      //   console.log(num, myList);
+      myList["start"] = num;
+      myList["end"] = num;
+      myList["counter"] = 1;
     }
   });
 
-  return newArr;
+  return finArr.join(",");
 }
 
 console.log(
   solution([
     -10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18,
-    19, 20,
+    19, 20, 24, 28,
   ])
 );

@@ -11,56 +11,81 @@ solution([-10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 1
 // returns "-10--8,-6,-3-1,3-5,7-11,14,15,17-20"
  */
 
-function solution(list) {
-  // TODO: complete solution
-  let finArr = [];
-  let myList = {
-    counter: 0,
-    start: 0,
-    end: 0,
-  };
+// function solution(list) {
+//   // TODO: complete solution
+//   let finArr = [];
+//   let myList = {
+//     counter: 0,
+//     start: 0,
+//     end: 0,
+//   };
 
-  list.forEach((num, i, arr) => {
-    if (num === myList["end"] + 1) {
-      myList["end"] = num;
-      myList["counter"]++;
-      if (num === arr[arr.length - 1] && myList["counter"] >= 3) {
-        finArr.push(`${myList["start"]}-${myList["end"]}`);
-      } else if (
-        num === arr[arr.length - 1] &&
-        myList["counter"] <= 2 &&
-        myList["counter"] > 0
-      ) {
-        if (myList["start"] === myList["end"]) {
-          finArr.push(myList["start"]);
-        } else if (myList["start"] !== myList["end"]) {
-          finArr.push(myList["start"]);
-          finArr.push(myList["end"]);
-        }
-      }
-    } else if (num !== myList["end"] + 1) {
-      if (myList["counter"] >= 3) {
-        finArr.push(`${myList["start"]}-${myList["end"]}`);
-      }
+//   list.forEach((num, i, arr) => {
+//     if (num === myList["end"] + 1) {
+//       myList["end"] = num;
+//       myList["counter"]++;
+//       if (num === arr[arr.length - 1] && myList["counter"] >= 3) {
+//         finArr.push(`${myList["start"]}-${myList["end"]}`);
+//       } else if (
+//         num === arr[arr.length - 1] &&
+//         myList["counter"] <= 2 &&
+//         myList["counter"] > 0
+//       ) {
+//         if (myList["start"] === myList["end"]) {
+//           finArr.push(myList["start"]);
+//         } else if (myList["start"] !== myList["end"]) {
+//           finArr.push(myList["start"]);
+//           finArr.push(myList["end"]);
+//         }
+//       }
+//     } else if (num !== myList["end"] + 1) {
+//       if (myList["counter"] >= 3) {
+//         finArr.push(`${myList["start"]}-${myList["end"]}`);
+//       }
 
-      if (myList["counter"] <= 2 && myList["counter"] > 0) {
-        if (myList["start"] === myList["end"]) {
-          finArr.push(myList["start"]);
-        } else if (myList["start"] !== myList["end"]) {
-          finArr.push(myList["start"]);
-          finArr.push(myList["end"]);
-        }
-      }
-      if (num === arr[arr.length - 1]) finArr.push(num);
-      //   console.log(num, myList);
-      myList["start"] = num;
-      myList["end"] = num;
-      myList["counter"] = 1;
+//       if (myList["counter"] <= 2 && myList["counter"] > 0) {
+//         if (myList["start"] === myList["end"]) {
+//           finArr.push(myList["start"]);
+//         } else if (myList["start"] !== myList["end"]) {
+//           finArr.push(myList["start"]);
+//           finArr.push(myList["end"]);
+//         }
+//       }
+//       if (num === arr[arr.length - 1]) finArr.push(num);
+//       myList["start"] = num;
+//       myList["end"] = num;
+//       myList["counter"] = 1;
+//     }
+//   });
+
+//   return finArr.join(",");
+// }
+
+
+function solution(individualIntegers) {
+    return individualIntegers
+      .reduce(splitIntoRanges, [])
+      .map(convertToRange)
+      .join(",");
+  }
+  
+  function splitIntoRanges(ranges, number) {
+    if (!ranges.length) {
+      ranges.push([number]);
+      return ranges;
     }
-  });
+  
+    var lastRange = ranges[ranges.length - 1];
+    var lastNumber = lastRange[lastRange.length - 1];
+  
+    number === lastNumber + 1 ? lastRange.push(number) : ranges.push([number]);
+    return ranges;
+  }
+  
+  function convertToRange(range) {
+    return range.length < 3 ? range.join(",") : range[0] + "-" + range[range.length - 1];
+  }
 
-  return finArr.join(",");
-}
 
 console.log(
   solution([

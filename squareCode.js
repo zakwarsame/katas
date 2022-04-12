@@ -20,7 +20,6 @@ const squareCode = function (message) {
   let squareCodeArr = [];
 
   let i = 0;
-
   while (i < noSpaceArr.length) {
     let tempStrArr = noSpaceArr;
     let temp = squares;
@@ -39,9 +38,7 @@ const squareCode = function (message) {
     i++;
   }
 
-
   // implementing column functioning 
-
   let h = 0;
   while (h <= squareRows.length) {
     let newStr = "";

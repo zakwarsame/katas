@@ -35,7 +35,7 @@ const queenThreat = ({ board, white, black }) => {
   let x = black[0];
   let y = black[1];
 
-  if (board[p][q] == 1 && (p + q == x + y || p - q == x - y)) {
+  if (board[p][q] === 1 && (p + q === x + y || p - q === x - y)) {
     return true;
   }
 

@@ -38,6 +38,7 @@ const numGuesser = () => {
       answer = prompt("Guess a number: ");
     }
 
+    // edge case: check if user inputs same number again
     if (prevAnswer !== answer) {
       attempts++;
     }

@@ -22,7 +22,6 @@ const numGuesser = () => {
   let attempts = 1;
   let prevAnswer = answer;
 
-  console.log(num);
   while (num !== Number(answer)) {
     if (answer > num) {
       prevAnswer = answer;

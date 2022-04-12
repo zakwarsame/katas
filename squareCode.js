@@ -53,7 +53,7 @@ const squareCode = function (message) {
     h++;
   }
 
-  return squareCodeArr;
+  return squareCodeArr.join(' ');
 };
 
 console.log(squareCode("chill out"));

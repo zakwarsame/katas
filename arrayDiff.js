@@ -27,8 +27,10 @@ arrayDiff([1,2,2,2,3],[2]) == [1,3]
 // }
 
 function arrayDiff(a, b) {
-  let set = new Set(b)
-  return a.filter(x => !set.has(x));
+  let set = new Set(b);
+  return a.filter((x) => !set.has(x));
+
+
 }
 
 console.log(arrayDiff([1, 2, 3], [1, 2])); // [3]

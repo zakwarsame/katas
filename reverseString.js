@@ -9,17 +9,17 @@ const process = require("process");
 let args = process.argv.slice(2);
 
 function reversestring(strarr) {
-  let newArr = [];
+  let reverseArr = [];
 
   strarr.map((word) => {
     let newword = "";
     for (let i = word.length - 1; i >= 0; i--) {
       newword = newword + word[i];
     }
-    newArr.push(newword);
+    reverseArr.push(newword);
   });
 
-  return newArr.join('\n')
+  return reverseArr.join('\n')
 }
   
 
